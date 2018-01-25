@@ -1,5 +1,5 @@
 # aqua-nomad
-Aqua installation instruction on HashiCorp Nomad
+Aqua installation instructions on HashiCorp Nomad
 
 #### Download and install Consul and Nomad
 	cd $HOME
@@ -9,16 +9,16 @@ Aqua installation instruction on HashiCorp Nomad
 	unzip nomad_0.7.1_linux_amd64.zip && rm nomad_0.7.1_linux_amd64.zip
 	unzip consul_1.0.3_linux_amd64.zip && rm consul_1.0.3_linux_amd64.zip
 
-#### Start Consul (develpment mode)
+#### Start Consul (development mode)
 	consul agent -dev
 
-#### Start Nomad (develpment mode)
+#### Start Nomad (development mode)
 	nomad agent -dev -config=PATH-TO/nomad.hcl
 
 
 #### Install Aqua all-in-one
 
-Edit the aqua-csp.nomad file and put your DockerHub cresentials
+Edit the aqua-csp.nomad file and put your DockerHub credentials
 
 	auth {
 		username = "your-dockerhub-user"
@@ -28,28 +28,38 @@ Edit the aqua-csp.nomad file and put your DockerHub cresentials
 To start the job:
 	nomad run PATH-TO/aqua-csp.nomad
 
-To confirm aqua is on running stat
-	nomad status aqua-csp
+To confirm Aqua CSP is running
+
+```
+nomad status aqua-csp
+```
 
 #### Install Aqua Enforcer
 
 Access to the aqua console and create Batch Install
 
-Edit the aqua-agent.nomad file
-1. Put your DockerHub cresentials
+Edit the `aqua-agent.nomad` file
+1. Put your DockerHub credentials
 
+```
 	auth {
 		username = "your-dockerhub-user"
 		password = "your-dockerhub-pass"
 	}
+```
 
 2. Replace GATEWAY_IP_ADDR with the ip of the network interface bind to aqua-csp
 	"AQUA_SERVER" = "GATEWAY_IP_ADDR:3622"
 
 To start the job:
-	nomad run PATH-TO/aqua-agent.nomad
 
-To confirm aqua is on running stat
-	nomad status aqua-agent
+```
+nomad run PATH-TO/aqua-agent.nomad
+```
 
+To confirm the Aqua enforcer is running:
+
+```
+nomad status aqua-agent
+```
 
